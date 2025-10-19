@@ -31,6 +31,7 @@ func TestQueue(t *testing.T) {
 			if data.V == "test9999" {
 				t.Logf("Worker ID: %d", workerID)
 				t.Logf("Test 9999 passed")
+				time.Sleep(time.Second)
 				done <- struct{}{}
 			}
 			if data.V == "test8888" {
