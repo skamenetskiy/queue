@@ -2,6 +2,7 @@ package queue
 
 import (
 	"context"
+	"fmt"
 	"runtime"
 )
 
@@ -92,7 +93,7 @@ func (q *queue[T]) work(ctx context.Context) {
 			func() {
 				defer func() {
 					if err := recover(); err != nil {
-						q.errs <- err.(error)
+						q.errs <- fmt.Errorf("panic: %v", err)
 					}
 				}()
 				if err := q.Runner(ctx, data); err != nil {
